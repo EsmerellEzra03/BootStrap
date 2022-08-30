@@ -16,7 +16,7 @@
 
                     {{ __('You are logged in!') }}
                     <div>
-                    <button type="button" class="btn btn-dark mt-20">Button</button>
+                        <a href="{{ route('todos:index')}}" type="button" class="btn btn-dark" style="margin-top: 15px;">To-Do</a>
                     </div>
                 </div>
             </div>
