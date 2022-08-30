@@ -14,11 +14,11 @@ return new class extends Migration
     public function up()
     {
         Schema::create('todos', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('user_id');
-            $table->string('title');
+            $table->increments('id');
+            $table->text('name');
             $table->text('description');
-            $table->date('date');
+            $table->text('date');
+            $table->unsignedBigInteger('user_id')->nullable();
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users');
