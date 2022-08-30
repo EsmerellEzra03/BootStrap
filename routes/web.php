@@ -20,3 +20,16 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+//Todos Routes
+Route::get('/todos/index', [App\Http\Controllers\TodosController::class, 'index'])->name('todos:index');
+
+Route::get('/todos/create', [App\Http\Controllers\TodosController::class, 'create'])->name('todos:create');
+
+Route::post('/todos/store', [App\Http\Controllers\TodosController::class, 'store'])->name('todos:store');
+
+Route::get('/todos/show/{todos}', [App\Http\Controllers\TodosController::class, 'show'])->name('todos:show');
+
+Route::post('/todos/edit/{todos}', [App\Http\Controllers\TodosController::class, 'edit'])->name('todos:edit');
+
+Route::get('/todos/destroy/{todos}', [App\Http\Controllers\TodosController::class, 'destroy'])->name('todos:destroy');
