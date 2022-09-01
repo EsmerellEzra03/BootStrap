@@ -23,6 +23,9 @@
                       <input type="text" class="form-control" name="name" aria-describedby="name" placeholder="Enter to-do title">
                       <small id="name" class="form-text text-muted"></small>
                     </div>
+                    @if($errors->any())
+                      {!! implode('', $errors->all('<div class="alert alert-danger">:message</div>')) !!}
+                    @endif
                     <div class="form-group" style="margin-top: 10px">
                       <label for="text">Description</label>
                       <input type="text" class="form-control" name="description" placeholder="Description">
