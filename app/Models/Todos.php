@@ -13,6 +13,7 @@ class Todos extends Model
         'title',
         'description',
         'date',
+        'attachment',
     ];
 
     public function users()
