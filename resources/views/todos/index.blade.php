@@ -52,7 +52,7 @@
                         </tbody>
                         @endforeach
                       </table>
-
+                      {{ $todos->links() }}
                 </div>
             </div>
         </div>
