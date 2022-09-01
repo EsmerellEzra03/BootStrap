@@ -28,8 +28,12 @@
                       <input type="text" class="form-control" name="description" placeholder="Description" value="{{ $todos->description }}">
                     </div>
                     <div class="form-group" style="margin-top: 10px">
-                      <label for="text">Date</label>
-                      <input type="text" class="form-control" name="date" placeholder="To-do Date" value="{{ $todos->date }}">
+                      <label for="date">Date</label>
+                      <input type="date" class="form-control" name="date" placeholder="Choose the date" value="{{ $todos->date }}">
+                    </div>
+                    <div class="form-group" style="margin-top: 10px">
+                      <label for="file" class="form-label">Image</label>
+                      <input class="form-control" type="file" id="file" name="attachment" value="{{ $todos->attachment }}">
                     </div>
                     <div style="margin-top: 10px">
                     <button type="submit" class="btn btn-success">Update To-Do</button>
