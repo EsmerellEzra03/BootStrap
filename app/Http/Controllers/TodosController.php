@@ -14,9 +14,16 @@ class TodosController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $todos=Todos::paginate(5);
+        //$todos=Todos::paginate(5);
+        if($request->keyword){
+            $todos = Todos::query()
+                        ->where('name','LIKE','%'.$request->keyword.'%')
+                        ->paginate(5);
+        }else{
+            $todos =  Todos::paginate(5);
+        }
         //$todos=Todos::all();
         return view('todos.index',compact('todos'));
     }
