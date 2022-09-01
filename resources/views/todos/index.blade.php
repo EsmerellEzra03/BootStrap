@@ -13,7 +13,14 @@
                             {{ session('status') }}
                         </div>
                     @endif
-
+                  <form action="" method="">
+                      <div class="input-group mt-2 p-2">
+                          <input type="text" class="form-control" name="keyword" value="" placeholder="Search by Name">
+                          <div class="input-group-append">
+                              <button class="btn btn-primary" type="submit">Search</button>
+                          </div>
+                      </div>
+                  </form>
                    <h3>To-Do List</h3>
                    <p>You have {{ count($todos) }} pending to-do list</p>
                    <a href="{{ route('todos:create')}}" type="button" class="btn btn-dark">Add To-Do</a>
