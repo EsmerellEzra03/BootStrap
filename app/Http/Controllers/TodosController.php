@@ -16,7 +16,8 @@ class TodosController extends Controller
      */
     public function index()
     {
-        $todos=Todos::all();
+        $todos=Todos::paginate(5);
+        //$todos=Todos::all();
         return view('todos.index',compact('todos'));
     }
 
