@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 use App\Models\Todos;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Storage;
+use File;
 
 class TodosController extends Controller
 {
@@ -42,6 +44,18 @@ class TodosController extends Controller
         $todos->description = $request->description;
         $todos->date = $request->date;
         $todos->save();
+
+        if($request->hasFile('attachment'))
+        {
+            //logic dalam sini
+            //rename
+            $filename = $todos->name.'-'.$todos->date.'-'.$request->attachment->getClientOriginalExtension();
+            //simpan dalam storage
+            Storage::disk('public')->put($filename,File::get($request->attachment));
+            //save
+            $todos->update(['attachment'=>$filename]);
+
+        }
 
         return redirect()->route('todos:index')->with('message', 'To-Do Added Successfully');
     }
