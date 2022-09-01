@@ -46,11 +46,15 @@ class TodosController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'name' => 'required|min:5', //perlu isi lebih dpda 5 characters
+        ]);
         //declare model
         $todos = new Todos;
         $todos->name = $request->name;
         $todos->description = $request->description;
         $todos->date = $request->date;
+        //$todos->user_id = Auth::user()->id;
         $todos->save();
 
         if($request->hasFile('attachment'))
