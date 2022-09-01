@@ -24,6 +24,7 @@
                             <th scope="col">Title</th>
                             <th scope="col">Decsription</th>
                             <th scope="col">To-Do Date</th>
+                            <th scope="col">Image</th>
                             <th scope="col">Actions</th>
                           </tr>
                         </thead>
@@ -35,6 +36,13 @@
                             <td>{{ $todo->name }}</td>
                             <td>{{ $todo->description }}</td>
                             <td>{{ $todo->date }}</td>
+                            <td>
+                              @if( !$todo->attachment )
+                              No Attachment Chosen
+                              @else
+                              <img src="{{ asset('storage/'.$todo->attachment) }}" class="img-thumbnail">
+                              @endif
+                            </td>
                             <td>
                               <a href="{{ route('todos:show',$todo) }}" type="button" class="btn btn-outline-dark" style="--bs-btn-padding-y: .20rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">Edit</a>
 
