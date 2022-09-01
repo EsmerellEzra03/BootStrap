@@ -15,7 +15,7 @@
                     @endif
 
                   <h3>Add To-Do List</h3>
-                  <form method="POST" action="{{route('todos:store')}}">
+                  <form method="POST" action="{{route('todos:store')}}" enctype="multipart/form-data">
                     @csrf
 
                     <div class="form-group">
@@ -30,6 +30,10 @@
                     <div class="form-group" style="margin-top: 10px">
                       <label for="date">Date</label>
                       <input type="date" class="form-control" name="date" placeholder="Choose the date">
+                    </div>
+                    <div class="form-group" style="margin-top: 10px">
+                      <label for="file" class="form-label">Image</label>
+                      <input class="form-control" type="file" id="file" name="attachment">
                     </div>
                     <div style="margin-top: 15px">
                     <button type="submit" class="btn btn-success">Add To-Do</button>
