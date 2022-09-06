@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,6 +21,12 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::group(['middleware' => ['auth', 'admin']], function () {
+    Route::get('admin-view', [HomeController::class, 'adminView'])->name('admin.view');
+ });
+//  Route::group(['middleware' => ['auth', 'admin']], function () {
+//     Route::get('admin-view', 'HomeController@adminView')->name('admin.view');
+// });
 
 //Todos Routes
 Route::get('/todos/index', [App\Http\Controllers\TodosController::class, 'index'])->name('todos:index');
@@ -33,3 +40,7 @@ Route::get('/todos/show/{todos}', [App\Http\Controllers\TodosController::class, 
 Route::post('/todos/edit/{todos}', [App\Http\Controllers\TodosController::class, 'edit'])->name('todos:edit');
 
 Route::get('/todos/destroy/{todos}', [App\Http\Controllers\TodosController::class, 'destroy'])->name('todos:destroy');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

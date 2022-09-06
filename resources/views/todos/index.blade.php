@@ -60,6 +60,7 @@
                         @endforeach
                       </table>
                       {{ $todos->links() }}
+                      <!--<?php echo $todos->links() ;?>-->
                 </div>
             </div>
         </div>

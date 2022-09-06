@@ -1,11 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
+use File;
+use Storage;
 use App\Models\Todos;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Storage;
-use File;
+use Illuminate\Support\Facades\Hash;
 
 class TodosController extends Controller
 {
@@ -18,11 +19,12 @@ class TodosController extends Controller
     {
         //$todos=Todos::paginate(5);
         if($request->keyword){
-            $todos = Todos::query()
+            $todos = auth()->user()->todos->query()
                         ->where('name','LIKE','%'.$request->keyword.'%')
+                        ->orWhere('description','LIKE','%'.$request->keyword.'%')
                         ->paginate(5);
         }else{
-            $todos =  Todos::paginate(5);
+            $todos =  auth()->user()->todos()->paginate(5);
         }
         //$todos=Todos::all();
         return view('todos.index',compact('todos'));
@@ -48,20 +50,23 @@ class TodosController extends Controller
     {
         $request->validate([
             'name' => 'required|min:5', //perlu isi lebih dpda 5 characters
+        ],
+        [
+            'name.required' => 'Characters must be at least 5',
         ]);
         //declare model
         $todos = new Todos;
         $todos->name = $request->name;
         $todos->description = $request->description;
         $todos->date = $request->date;
-        //$todos->user_id = Auth::user()->id;
+        $todos->user_id = Auth::user()->id;
         $todos->save();
 
         if($request->hasFile('attachment'))
         {
             //logic dalam sini
             //rename
-            $filename = $todos->name.'-'.$todos->date.'-'.$request->attachment->getClientOriginalExtension();
+            $filename = Hash::make($todos->name.'-'.$todos->date.'-'.$request->attachment->getClientOriginalExtension());
             //simpan dalam storage
             Storage::disk('public')->put($filename,File::get($request->attachment));
             //save
