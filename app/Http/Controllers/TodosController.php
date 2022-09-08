@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use File;
 use Storage;
 use App\Models\Todos;
+use App\Jobs\TodoCreatedJob;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -73,6 +74,8 @@ class TodosController extends Controller
             $todos->update(['attachment'=>$filename]);
 
         }
+
+        TodoCreatedJob::dispatch($todos);
 
         return redirect()->route('todos:index')->with('message', 'To-Do Added Successfully');
     }
